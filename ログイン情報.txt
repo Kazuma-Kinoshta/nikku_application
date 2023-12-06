@@ -1,0 +1,3 @@
+URL: http://localhost:8080/user/login
+ユーザーID: 0000000001
+ユーザーパスワード: 0000000000
