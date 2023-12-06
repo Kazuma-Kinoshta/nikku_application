@@ -5,6 +5,14 @@
 <!--Mapperとxmlをマッピング-->
 <mapper namespace="com.diary.management.nikku.Repository.DiaryMapper">
 
+<!--マッピング定義(日記)-->
+    <resultMap type="com.diary.management.nikku.Model.DiaryModel" id="diary">
+        <id column="user_id" property="userId"></id>
+        <result column="diary_date" property="diaryDate"></result>
+        <result column="diary_text" property="diaryText"></result>
+
+    </resultMap>
+
     <!-- 日記登録   -->
     <insert id="insertDiary">
         insert into diary(
@@ -43,9 +51,18 @@
     </insert>
 
     <!-- 日記取得(全件)   -->
-    <select id="selectDiariesAll" resultType="DiaryModel">
+    <select id="selectDiariesAll" resultType="DiaryModel" resultMap="diary">
             select * from diary inner join questionnare on diary.user_id = questionnare.user_id
                 and diary.diary_date = questionnare.diary_date
                  inner join users on users.user_id = diary.user_id;
+
+    </select>
+
+    <!--日記取得(1件詳細)-->
+    <select id="selectDiary" resultType="DiaryModel" resultMap="diary">
+        select * from diary inner join questionnare on diary.user_id = questionnare.user_id
+        and diary.diary_date = questionnare.diary_date
+        inner join users on users.user_id = diary.user_id
+        where diary.user_id = #{userId} and diary.diary_date = #{diaryDate};
     </select>
 </mapper>

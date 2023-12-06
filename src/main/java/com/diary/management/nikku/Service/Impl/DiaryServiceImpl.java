@@ -21,6 +21,13 @@ public class DiaryServiceImpl implements DiaryService {
         return diaries;
     }
 
+    /*日記の取得(詳細1件)*/
+    @Override
+    public DiaryModel selectDiary(String userId, String diaryDate){
+        DiaryModel diary = diaryMapper.selectDiary(userId, diaryDate);
+        return diary;
+    }
+
     @Override
     public void insertDiary(DiaryModel diaryModel){
         diaryMapper.insertDiary(diaryModel);

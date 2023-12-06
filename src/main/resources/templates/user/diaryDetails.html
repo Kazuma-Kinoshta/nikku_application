@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>examination</title>
+    <title>日記詳細</title>
 
     <!--CSS読み込み-->
-    <link rel="stylesheet" th:href="@{/css/diaryUpload.css}">
+    <link rel="stylesheet" th:href="@{/css/diaryDetails.css}">
 </head>
 
 <body>
@@ -16,54 +16,46 @@
             <img th:src="@{/img/logo.png}" style="width:200px;" />
         </div>
         <div class="img_box" style="width:300px; margin-left:40px; margin-top:30px;">
-            <h1>日記一覧</h1>
-        </div>
-        <div class="wrapper">
-            <form method="post">
-                <div class="container">
-                    <div>
-                        <span style="margin-right:10px;">学生</span>
-                        <input type="text" name="" />
-                    </div>
-                </div>
-            </form>
-
+            <h1>日記詳細</h1>
         </div>
 
 <!-- 体調   -->
             <div class="wrapper">
+                <div class="container">
+                    <div>
                 <table border="1" style="border-collapse: collapse">
                     <tr>
                         <th>学年</th>
                         <th>クラス</th>
                         <th>出席番号</th>
-                        <th>日付</th>
                         <th>氏名</th>
-                        <th>確認</th>
-                        <th>　　</th>
                     </tr>
-                    <span th:each="diary:${diaries}">
+
                     <tr>
                         <td th:text="${diary.grade}" rowspan="2"></td>
                         <td th:text="${diary.userClass}"></td>
                         <td th:text="${diary.studentNumber}"></td>
-                        <td th:text="${#dates.format(diary.diaryDate, 'YYYY/MM/dd')}">　</td>
                         <td><span th:text="${diary.lastName}"></span> <span th:text="${diary.firstName}"></span></td>
-                        <td th:text="${diary.checked} ? '済' : '未'"></td>
-                        <td>
-                            <form action="/user/diaryDetails" method="get">
-                                <input type="submit" value="詳細" />
-                                <input type="hidden" name="userId" th:value="${diary.userId}">
-                                <input type="hidden" name="diaryDate" th:value="${#dates.format(diary.diaryDate, 'YYYY-MM-dd')}">
-                            </form>
-                        </td>
+
                     </tr>
                     <tr style="height:40px;">
                         <th>本文</th>
                         <td colspan="6" th:text="${diary.diaryText}"></td>
                     </tr>
-                        </span>
+
                 </table>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <th>担任確認印</th>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
     
     </div>

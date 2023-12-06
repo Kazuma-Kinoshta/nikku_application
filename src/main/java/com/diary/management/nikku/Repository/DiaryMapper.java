@@ -17,4 +17,7 @@ public interface DiaryMapper {
 
     /*日記取得(全件)*/
     public List<DiaryModel> selectDiariesAll();
+
+    /*日記取得(詳細1件)*/
+    public DiaryModel selectDiary(String userId, String diaryDate);
 }

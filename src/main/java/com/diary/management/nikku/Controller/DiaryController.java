@@ -6,10 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -46,11 +43,23 @@ public class DiaryController {
         model.addAttribute("diaries",diaries);
             return "/user/diaryList";
         }
+    /*日記詳細*/
+    @GetMapping("/diaryDetails")
+    public String postDiaryDetails(@RequestParam("userId") String userId,
+                                   @RequestParam("diaryDate") String diaryDate,
+                                   Model model){
+        DiaryModel diary = diaryService.selectDiary(userId, diaryDate);
+        model.addAttribute("diary", diary);
+
+        return "/user/diaryDetails";
+    }
 
         @GetMapping("/diaryUpload")
     public String getDiaryList(){
 
         return "/user/diaryUpload";
         }
+
+
 
     }
