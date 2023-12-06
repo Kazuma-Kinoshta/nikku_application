@@ -22,4 +22,5 @@ private String firstName;
 private String userClass;
 private String grade;
 private String studentNumber;
+private String schoolName;
 }
