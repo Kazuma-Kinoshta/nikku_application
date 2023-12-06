@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>examination</title>
+
+    <!--CSS読み込み-->
+<!--    <link rel="stylesheet" href="./css/style.css">-->
+</head>
+
+<body>
+    <div style="width:100%">
+        <div class="img_box" style="width:300px; margin-left:40px; margin-top:30px;">
+            <img th:src="@{/img/logo.png}" style="width:200px;">
+        </div>
+        <form method="post" action="/user/login">
+        <div class="login_box" style="width:70%; margin:0 auto; text-align:center;">
+            ユーザーID<br />
+            <input type="text" name="userId"><br /><br />
+
+            パスワード<br />
+            <input type="text" name="password"><br /><br />
+
+            <button type="submit">ログイン</button>
+        </div>
+        </form>
+    </div>
+</body>
+
+</html>

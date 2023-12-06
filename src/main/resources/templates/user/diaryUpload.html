@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>examination</title>
+
+    <!--CSS読み込み-->
+    <link rel="stylesheet" th:href="@{/css/diaryUpload.css}">
+</head>
+
+<body>
+<div style="width:100%">
+    <div class="img_box" style="width:300px; margin-left:40px; margin-top:30px;">
+        <img th:src="@{/img/logo.png}" style="width:200px;"/>
+    </div>
+    <div class="img_box" style="width:300px; margin-left:40px; margin-top:30px;">
+        <h1>日記投稿</h1>
+    </div>
+    <form method="post" action="/user/diaryUpload" th:object="${diaryForm}">
+    <!-- ユーザーID       -->
+        <input th:field="*{userId}" type="hidden" value="0000000001" />
+
+        <!-- 体調   -->
+        <div class="wrapper">
+            <h2>今日の具合</h2>
+            <div class="container">
+                <div class="radio-box">
+                    <span>良い</span><br/>
+                    <input type="radio" name="feelings" value="5" th:field="*{feelings}"/>
+                </div>
+                <div class="radio-box">
+                    <span>少し良い</span><br/>
+                    <input type="radio" name="feelings" value="4" th:field="*{feelings}"/>
+                </div>
+                <div class="radio-box">
+                    <span>普通</span><br/>
+                    <input type="radio" name="feelings" value="3" th:field="*{feelings}"/>
+                </div>
+                <div class="radio-box">
+                    <span>あまりよくない</span><br/>
+                    <input type="radio" name="feelings" value="2" th:field="*{feelings}"/>
+                </div>
+                <div class="radio-box">
+                    <span>悪い</span><br/>
+                    <input type="radio" name="feelings" value="1" th:field="*{feelings}"/>
+                </div>
+            </div>
+        </div>
+
+        <!--朝食-->
+        <div class="wrapper">
+            <h2>朝食</h2>
+            <div class="container">
+                <div class="radio-box">
+                    <span>食べた</span><br/>
+                    <input type="radio" name="breakfast" value="true" th:field="*{breakfast}"/>
+                </div>
+                <div class="radio-box">
+                    <span>食べていない</span><br/>
+                    <input type="radio" name="breakfast" value="false" th:field="*{breakfast}"/>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <h2>就寝時間</h2>
+            <div class="container">
+                <div>
+                    <select id="sleepHour">
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                    </select>
+                    <span>時</span>
+                </div>
+                <div style="margin-left:40px;">
+                    <select id="sleepMinute">
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+
+                    </select>
+                    <span>分</span>
+                    <input type="hidden" th:field="*{sleepTime}">
+                </div>
+                <div style="margin-left:40px;text-align:center;">
+                    <span>寝てない</span>
+                    <input type="checkbox" th:field="*{notSleep}">
+                </div>
+            </div>
+            </div>
+        <div class="wrapper">
+            <h2>起床寝間</h2>
+            <div class="container">
+                <div>
+                    <select id="wakeHour">
+                        <option value="00">00</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                    </select>
+                    <span>時</span>
+                </div>
+                <div style="margin-left:40px;">
+                    <select id="wakeMinute">
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+
+                    </select>
+                    <span>分</span>
+                </div>
+                <input type="hidden" th:field="*{wakeTime}" />
+
+            </div>
+        </div>
+
+
+                <!--本文-->
+            <div class="wrapper">
+                <h2>本文</h2>
+                <textarea th:field="*{diaryText}" name="text" style="width:80%;height:70px;"></textarea>
+            </div>
+            <button type="submit" id="submitButton">提出</button>
+    </form>
+
+</div>
+<script>
+    document.querySelector('#submitButton').addEventListener('click',function(){
+        document.querySelector("#sleepTime").value = document.querySelector("#sleepHour").value +
+        document.querySelector("#sleepMinute").value;
+
+        document.querySelector("#wakeTime").value = document.querySelector("#wakeHour").value +
+        document.querySelector("#wakeMinute").value;
+    });
+</script>
+</body>
+
+</html>

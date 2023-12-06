@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Mapperとxmlをマッピング-->
+<mapper namespace="com.diary.management.nikku.Repository.DiaryMapper">
+
+    <!-- 日記登録   -->
+    <insert id="insertDiary">
+        insert into diary(
+        user_id,
+        diary_date,
+        diary_text,
+        checked,
+        school_id) values(
+        #{userId},
+        #{diaryDate},
+        #{diaryText},
+        #{checked},
+        '1');
+        
+    </insert>
+
+    <!--アンケート登録-->
+    <insert id="insertQuestionnare">
+        INSERT INTO questionnare(
+        user_id,
+        diary_date,
+        feelings,
+        breakfast,
+        sleep_time,
+        wake_time,
+        not_sleep)
+        VALUES(
+        #{userId},
+        #{diaryDate},
+        #{feelings},
+        #{breakfast},
+        #{sleepTime},
+        #{wakeTime},
+        #{notSleep}
+        );
+    </insert>
+
+    <!-- 日記取得(全件)   -->
+    <select id="selectDiariesAll" resultType="DiaryModel">
+            select * from diary inner join questionnare on diary.user_id = questionnare.user_id
+                and diary.diary_date = questionnare.diary_date
+                 inner join users on users.user_id = diary.user_id;
+    </select>
+</mapper>

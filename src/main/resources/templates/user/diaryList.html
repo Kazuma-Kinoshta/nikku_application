@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>examination</title>
+
+    <!--CSS読み込み-->
+    <link rel="stylesheet" th:href="@{/css/diaryUpload.css}">
+</head>
+
+<body>
+    <div style="width:100%">
+        <div class="img_box" style="width:300px; margin-left:40px; margin-top:30px;">
+            <img th:src="@{/img/logo.png}" style="width:200px;" />
+        </div>
+        <div class="img_box" style="width:300px; margin-left:40px; margin-top:30px;">
+            <h1>日記一覧</h1>
+        </div>
+        <div class="wrapper">
+            <form method="post">
+                <div class="container">
+                    <div>
+                        <span style="margin-right:10px;">学生</span>
+                        <input type="text" name="" />
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <form method="post" action="/user/diaryUpload">
+<!-- 体調   -->
+            <div class="wrapper">
+                <table border="1" style="border-collapse: collapse">
+                    <tr>
+                        <th>学年</th>
+                        <th>クラス</th>
+                        <th>出席番号</th>
+                        <th>日付</th>
+                        <th>氏名</th>
+                        <th>確認</th>
+                        <th>　　</th>
+                    </tr>
+                    <span th:each="diary:${diaries}">
+                    <tr>
+                        <td th:text="${diary.grade}" rowspan="2"></td>
+                        <td th:text="${diary.userClass}"></td>
+                        <td th:text="${diary.studentNumber}"></td>
+                        <td th:text="${#dates.format(diary.diaryDate, 'YYYY/MM/dd')}">　</td>
+                        <td><span th:text="${diary.lastName}"></span> <span th:text="${diary.firstName}"></span></td>
+                        <td th:text="${diary.checked} ? '済' : '未'"></td>
+                        <td>
+                            <form action="" method="post">
+
+                            </form>
+                        </td>
+                    </tr>
+                    <tr style="height:40px;">
+                        <th>本文</th>
+<!--                        <td colspan="6" th:text="${diary.diaryText}"></td>-->
+                    </tr>
+                        </span>
+                </table>
+            </div>
+        </form>
+    
+    </div>
+</body>
+
+</html>

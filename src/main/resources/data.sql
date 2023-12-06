@@ -1,0 +1,180 @@
+INSERT INTO school(
+    school_id,
+        school_name,
+        school_type,
+        school_prefecture,
+        mail,
+        tell,
+        available)
+VALUES(
+    '1',
+    'A高等学園',
+    '3',
+    '沖縄県',
+    'sazae_ana5000_namihe@yahoo.co.jp',
+    '999-999-9999',
+    TRUE
+),(
+    '2',
+    'B高等学園',
+    '3',
+    '岐阜県',
+    'sazae_ana5000_namihe@yahoo.co.jp',
+    '999-999-9999',
+    TRUE
+);
+
+INSERT INTO users(
+user_id,
+    password,
+    last_name,
+    first_name,
+    mail,
+    school_id,
+    authority,
+    user_class,
+    grade,
+    student_number
+)VALUES(
+    '0000000001',
+    '0000000000',
+    '生徒',
+    '太郎',
+    null,
+    '1',
+    '1',
+    '1',
+    '1',
+    '1'
+),(
+      '0000000002',
+      '0000000000',
+      '担任',
+      '太郎',
+      null,
+      '1',
+      '2',
+      '1',
+      '1',
+      null
+  ),(
+         '0000000003',
+         '0000000000',
+         '校長',
+         '太郎',
+         'sazae_ana5000_namihe@yahoo.co.jp',
+         '1',
+         '3',
+         null,
+         null,
+         null
+     ),(
+           '0000000004',
+           '0000000000',
+           'B生徒',
+           '太郎',
+           null,
+           '2',
+           '1',
+           '1',
+           '1',
+           '1'
+       ),(
+             '0000000005',
+             '0000000000',
+             'B担任',
+             '太郎',
+             null,
+             '2',
+             '2',
+             '1',
+             '1',
+             null
+         ),(
+                '0000000006',
+                '0000000000',
+                'B校長',
+                '太郎',
+                'sazae_ana5000_namihe@yahoo.co.jp',
+                '2',
+                '3',
+                null,
+                null,
+                null
+            );
+
+INSERT INTO diary(
+    user_id,
+        diary_date,
+        diary_text,
+        checked,
+        school_id
+
+)VALUES(
+    '0000000001',
+    '2023-11-14',
+    '今日は良い天気でしたので外で遊ぼうと思ったけど何かダルくてやめたけど夕方は散歩した。',
+    false,
+    '1'
+),(
+      '0000000001',
+      '2023-11-15',
+      '急な冷え込みが辛くて風邪ひいたかと思ったけど意外にひいてなくて良かったです',
+      false,
+      '1'
+),(
+        '0000000004',
+        '2023-11-14',
+        'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB',
+        false,
+        '2'
+  ),(
+           '0000000004',
+           '2023-11-15',
+           'テストーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー',
+           false,
+           '2'
+     );
+
+INSERT INTO questionnare(
+    user_id,
+        diary_date,
+        feelings,
+        breakfast,
+        sleep_time,
+        wake_time,
+        not_sleep
+
+)VALUES(
+    '0000000001',
+    '2023-11-14',
+    '3',
+    true,
+    '22:00',
+    '07:00',
+    false
+),(
+      '0000000001',
+      '2023-11-15',
+      '4',
+      true,
+      '23:00',
+      '07:00',
+      false
+  ),(
+         '0000000002',
+         '2023-11-14',
+         '2',
+         true,
+         '00:00',
+         '07:00',
+         false
+     ),(
+               '0000000002',
+               '2023-11-15',
+               '1',
+               true,
+               '02:00',
+               '07:00',
+               false
+           );
