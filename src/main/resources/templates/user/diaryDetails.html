@@ -55,7 +55,9 @@
                                     <td>済</td>
                                 </th:block>
                                 <th:block th:if="${diary.checked == false}">
-                                    <form>
+                                    <form action="/user/diaryCheck" method="get">
+                                        <input type="hidden" name="userId" th:value="${diary.userId}" />
+                                        <input type="hidden" name="diaryDate" th:value="${#dates.format(diary.diaryDate, 'YYYY-MM-dd')}" />
                                         <td><input type="submit" value="確認する"></td>
                                     </form>
                                 </th:block>

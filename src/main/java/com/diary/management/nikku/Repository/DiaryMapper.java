@@ -20,4 +20,7 @@ public interface DiaryMapper {
 
     /*日記取得(詳細1件)*/
     public DiaryModel selectDiary(String userId, String diaryDate);
+
+    /*日記確認*/
+    public void checkDiary(String userId, String diaryDate);
 }

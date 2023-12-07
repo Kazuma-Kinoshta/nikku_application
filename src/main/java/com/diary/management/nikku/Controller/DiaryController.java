@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -47,10 +48,9 @@ public class DiaryController {
         }
     /*日記詳細*/
     @GetMapping("/diaryDetails")
-    public String postDiaryDetails(@RequestParam("userId") String userId,
-                                   @RequestParam("diaryDate") String diaryDate,
+    public String postDiaryDetails(@ModelAttribute("userId") String userId,
+                                   @ModelAttribute("diaryDate") String diaryDate,
                                    Model model){
-        DiaryForm diaryForm = new DiaryForm();
         DiaryModel diary = diaryService.selectDiary(userId, diaryDate);
         diary.setSleepTime(diary.getSleepTime().substring(0,5));
         diary.setWakeTime(diary.getWakeTime().substring(0,5));
@@ -59,12 +59,29 @@ public class DiaryController {
         return "/user/diaryDetails";
     }
 
-        @GetMapping("/diaryUpload")
+    @GetMapping("/diaryCheck")
+    public String diaryChecked(@RequestParam("userId") String userId,
+                               @RequestParam("diaryDate") String diaryDate,
+                               Model model,
+                               RedirectAttributes redirectAttributes){
+
+        //チェック処理
+        diaryService.checkDiary(userId, diaryDate);
+
+        //詳細画面表示処理
+        DiaryModel diary = diaryService.selectDiary(userId, diaryDate);
+        diary.setSleepTime(diary.getSleepTime().substring(0,5));
+        diary.setWakeTime(diary.getWakeTime().substring(0,5));
+        model.addAttribute("diary", diary);
+        redirectAttributes.addFlashAttribute("userId", userId);
+        redirectAttributes.addFlashAttribute("diaryDate",diaryDate);
+        return "redirect:/user/diaryDetails";
+    }
+
+    @GetMapping("/diaryUpload")
     public String getDiaryList(){
 
         return "/user/diaryUpload";
-        }
-
-
+    }
 
     }

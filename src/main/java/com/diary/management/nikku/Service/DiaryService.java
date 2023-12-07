@@ -17,4 +17,7 @@ public interface DiaryService {
 
     /*日記取得(詳細1件)*/
     public DiaryModel selectDiary(String userId, String diaryDate);
+
+    /*日記チェック*/
+    public void checkDiary(String userId, String diaryDate);
 }

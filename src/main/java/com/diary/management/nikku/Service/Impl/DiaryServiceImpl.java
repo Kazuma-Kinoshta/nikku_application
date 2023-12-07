@@ -38,4 +38,10 @@ public class DiaryServiceImpl implements DiaryService {
     public void insertQustionnare(DiaryModel diaryModel){
         diaryMapper.insertQuestionnare(diaryModel);
     }
+
+    @Override
+    public void checkDiary(String userId, String diaryDate){
+        diaryMapper.checkDiary(userId, diaryDate);
+
+    }
 }

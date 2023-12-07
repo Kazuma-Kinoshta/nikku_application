@@ -69,4 +69,11 @@
         inner join school on users.school_id = school.school_id
         where diary.user_id = #{userId} and diary.diary_date = #{diaryDate};
     </select>
+
+<!--日記チェック  -->
+   <update id="checkDiary">
+        update diary set checked = true
+       where user_id = #{userId} and diary_date = #{diaryDate};
+   </update>
+
 </mapper>
