@@ -11,6 +11,8 @@
         <result column="diary_date" property="diaryDate"></result>
         <result column="diary_text" property="diaryText"></result>
         <result column="school_name" property="schoolName"></result>
+        <result column="sleep_time" property="sleepTime"></result>
+        <result column="wake_time" property="wakeTime"></result>
 
     </resultMap>
 

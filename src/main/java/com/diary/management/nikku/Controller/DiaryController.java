@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -48,7 +50,10 @@ public class DiaryController {
     public String postDiaryDetails(@RequestParam("userId") String userId,
                                    @RequestParam("diaryDate") String diaryDate,
                                    Model model){
+        DiaryForm diaryForm = new DiaryForm();
         DiaryModel diary = diaryService.selectDiary(userId, diaryDate);
+        diary.setSleepTime(diary.getSleepTime().substring(0,5));
+        diary.setWakeTime(diary.getWakeTime().substring(0,5));
         model.addAttribute("diary", diary);
 
         return "/user/diaryDetails";

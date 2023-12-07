@@ -20,4 +20,16 @@ public class DiaryForm {
     String userClass;
     String grade;
     String studentNumber;
+
+    public void setDiaryDate(String today) {
+        this.diaryDate = today;
+    }
+
+    public void setChecked(boolean b) {
+        this.checked = b;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

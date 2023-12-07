@@ -32,7 +32,7 @@
                     </tr>
 
                     <tr>
-                        <td th:text="${diary.grade}" rowspan="2"></td>
+                        <td th:text="${diary.grade}"></td>
                         <td th:text="${diary.userClass}"></td>
                         <td th:text="${diary.studentNumber}"></td>
                         <td><span th:text="${diary.lastName}"></span> <span th:text="${diary.firstName}"></span></td>
@@ -46,15 +46,44 @@
                 </table>
                     </div>
                     <div>
-                        <table border="1">
+                        <table border="1" style="border-collapse:collapse;">
                             <tr>
                                 <th>担任確認印</th>
                             </tr>
                             <tr>
-                                <td></td>
+                                <th:block th:if="${diary.checked == true}">
+                                    <td>済</td>
+                                </th:block>
+                                <th:block th:if="${diary.checked == false}">
+                                    <form>
+                                        <td><input type="submit" value="確認する"></td>
+                                    </form>
+                                </th:block>
                             </tr>
                         </table>
                     </div>
+                </div>
+                <div style="margin-top:50px">
+                    <table border="1" style="border-collapse:collapse;">
+                        <tr>
+                            <th>日付</th>
+                            <th>元気度</th>
+                            <th>朝食</th>
+                            <th>就寝時間</th>
+                            <th>起床時間</th>
+                        </tr>
+                        <tr>
+                            <td th:text="${#dates.format(diary.diaryDate, 'YYYY/MM/dd')}"></td>
+                            <td th:text="${diary.feelings}"></td>
+                            <td th:text="${diary.breakfast}"></td>
+                            <td th:text="${diary.sleepTime}"></td>
+                            <td th:text="${diary.wakeTime}"></td>
+                        </tr>
+                        <tr>
+                            <th>本文</th>
+                            <td colspan="4" th:text="${diary.diaryText}"></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
     

@@ -14,4 +14,16 @@ public class UserForm {
     String userClass;
     String grade;
     String studentNumber;
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }

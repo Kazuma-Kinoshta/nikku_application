@@ -23,4 +23,20 @@ private String userClass;
 private String grade;
 private String studentNumber;
 private String schoolName;
+
+    public String getSleepTime() {
+        return this.sleepTime;
+    }
+
+    public String getWakeTime() {
+        return this.wakeTime;
+    }
+
+    public void setSleepTime(String sleepTime) {
+        this.sleepTime = sleepTime;
+    }
+
+    public void setWakeTime(String wakeTime) {
+        this.wakeTime = wakeTime;
+    }
 }
