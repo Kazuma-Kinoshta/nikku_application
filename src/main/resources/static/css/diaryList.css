@@ -1,0 +1,29 @@
+.wrapper{
+    margin-top:40px;
+    width:70%;
+    margin:0 auto;
+}
+
+.container{
+    width:84%;
+    display:flex;
+    margin-bottom:10px;
+}
+
+.radio-box{
+    text-align:center;
+    margin-right:60px;
+}
+
+th{
+    text-align:center;
+    }
+
+td{
+    text-align:center;
+}
+
+input[type="text"]{
+    width:30%;
+
+}
