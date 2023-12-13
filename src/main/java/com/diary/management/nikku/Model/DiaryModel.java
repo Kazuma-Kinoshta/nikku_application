@@ -3,7 +3,6 @@ package com.diary.management.nikku.Model;
 import lombok.Data;
 
 import java.util.Date;
-
 @Data
 public class DiaryModel {
 private String userId;
