@@ -1,6 +1,7 @@
 package com.diary.management.nikku.Model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import java.util.Date;
 @Setter
 @Entity
 public class DiaryModelJPA {
+    @Id
     private String userId;
     private Date diaryDate;
     private String diaryText;
@@ -27,20 +29,4 @@ public class DiaryModelJPA {
     private String grade;
     private String studentNumber;
     private String schoolName;
-
-    public String getSleepTime() {
-        return this.sleepTime;
-    }
-
-    public String getWakeTime() {
-        return this.wakeTime;
-    }
-
-    public void setSleepTime(String sleepTime) {
-        this.sleepTime = sleepTime;
-    }
-
-    public void setWakeTime(String wakeTime) {
-        this.wakeTime = wakeTime;
-    }
 }

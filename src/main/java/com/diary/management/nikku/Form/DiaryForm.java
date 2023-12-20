@@ -1,10 +1,16 @@
 package com.diary.management.nikku.Form;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
+@Setter
+@Getter
 public class DiaryForm {
+    @Setter
     String userId;
+    @Setter
     String diaryDate;
     String diaryText;
     Boolean checked;
@@ -18,18 +24,12 @@ public class DiaryForm {
     String lastName;
     String firstName;
     String userClass;
+    @Getter
     String grade;
     String studentNumber;
-
-    public void setDiaryDate(String today) {
-        this.diaryDate = today;
-    }
 
     public void setChecked(boolean b) {
         this.checked = b;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 }

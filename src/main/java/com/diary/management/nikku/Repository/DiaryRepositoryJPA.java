@@ -1,3 +1,4 @@
+package com.diary.management.nikku.Repository;
 import com.diary.management.nikku.Model.DiaryModelJPA;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

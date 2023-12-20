@@ -1,7 +1,9 @@
 package com.diary.management.nikku.Controller;
 import com.diary.management.nikku.Form.DiaryForm;
 import com.diary.management.nikku.Model.DiaryModel;
+import com.diary.management.nikku.Model.DiaryModelJPA;
 import com.diary.management.nikku.Service.DiaryService;
+import com.diary.management.nikku.Service.DiaryServiceJPA;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,8 +24,12 @@ public class DiaryController {
     DiaryService diaryService;
 
     @Autowired
+    DiaryServiceJPA diaryServiceJPA;
+
+    @Autowired
     ModelMapper modelMapper;
 
+    //日記アップロード
     @PostMapping("/diaryUpload")
     public String postDiary(@ModelAttribute DiaryForm diaryForm, Model model){
 
@@ -46,6 +52,29 @@ public class DiaryController {
         model.addAttribute("diaries",diaries);
             return "/user/diaryList";
         }
+
+        /*日記一覧(検索実行)*/
+    @GetMapping("diaryList/search")
+    public String diaryListSearch(Model model,
+                                  @RequestParam("grade") String grade,
+                                  @RequestParam("userClass") String userClass,
+                                  @RequestParam("studentNumber") String studentNumber,
+                                  @RequestParam("lastName") String lastName,
+                                  @RequestParam("firstName") String firstName,
+                                  @RequestParam("diaryDate") String diaryDate,
+                                  @RequestParam("checked") String checked){
+
+        DiaryForm diaryForm = new DiaryForm();
+        diaryForm.setGrade(grade);
+
+        //日記一覧へ
+        List<DiaryModelJPA> diaries = diaryServiceJPA.getSearchDiaries(diaryForm);
+        model.addAttribute("diaries",diaries);
+
+        return "/user/diaryList";
+    }
+
+
     /*日記詳細*/
     @GetMapping("/diaryDetails")
     public String postDiaryDetails(@ModelAttribute("userId") String userId,
