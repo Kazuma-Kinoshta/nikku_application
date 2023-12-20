@@ -1,4 +1,4 @@
-package com.diary.management.nikku.Service;
+package com.diary.management.nikku.Dao;
 
 import org.springframework.data.jpa.domain.Specification;
 

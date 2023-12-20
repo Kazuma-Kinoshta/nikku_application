@@ -1,5 +1,6 @@
 package com.diary.management.nikku.Service;
 
+import com.diary.management.nikku.Dao.DiarySpecification;
 import com.diary.management.nikku.Form.DiaryForm;
 import com.diary.management.nikku.Model.DiaryModelJPA;
 import com.diary.management.nikku.Repository.DiaryRepositoryJPA;
