@@ -1,7 +1,7 @@
 package com.diary.management.nikku.Controller;
 import com.diary.management.nikku.Form.DiaryForm;
 import com.diary.management.nikku.Model.DiaryModel;
-import com.diary.management.nikku.Model.DiaryModelJPA;
+import com.diary.management.nikku.Model.USERS1;
 import com.diary.management.nikku.Service.DiaryService;
 import com.diary.management.nikku.Service.DiaryServiceJPA;
 import org.modelmapper.ModelMapper;
@@ -68,7 +68,7 @@ public class DiaryController {
         diaryForm.setGrade(grade);
 
         //日記一覧へ
-        List<DiaryModelJPA> diaries = diaryServiceJPA.getSearchDiaries(diaryForm);
+        List<USERS1> diaries = diaryServiceJPA.getSearchDiaries(diaryForm);
         model.addAttribute("diaries",diaries);
 
         return "/user/diaryList";

@@ -14,7 +14,7 @@ public class UserRepository {
 
     public Map<String, Object> findById(String userId){
         String query = "SELECT *" +
-                        "FROM users "+
+                        " FROM users "+
                         "WHERE user_id=?";
         //検索実行
         Map<String, Object> user = jdbcTemplate.queryForMap(query,userId);
