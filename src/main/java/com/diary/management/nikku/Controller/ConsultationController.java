@@ -39,9 +39,5 @@ public class ConsultationController {
         return "user/consultationList";
     }
 
-    //生徒胃一覧画面へ遷移
-    @GetMapping("/studentList")
-    public String getStudentList(Model model){
-        return "user/studentList";
-    }
+
     }
