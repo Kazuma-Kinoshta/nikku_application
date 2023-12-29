@@ -1,15 +1,43 @@
 .logo_box{
-    width: 300px;
+    width: 200px;
     margin-left: 30px;
     margin-top: 5px;
     }
 
 .logo_img{
-    width:175px;
+    width:140px;
     }
 
+.header{
+    background-color:blue;
+    padding:10px 10px 10px;
+    margin-bottom:20px;
+}
+
+.header_content{
+    display:flex;
+    justify-content:space-between;
+
+}
+
 .header_menu{
-    
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.header_menu li{
+    border: 2px solid;
+    padding:5px;
+    margin-right:8px;
+    border-color:green;
+    background-color:white;
+    list-style: none;
+}
+
+.header_menu li a{
+    text-decoration:none;
+    color:black;
 }
 
 .wrapper{

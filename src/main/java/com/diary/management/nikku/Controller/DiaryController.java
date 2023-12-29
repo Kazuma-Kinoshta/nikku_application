@@ -29,6 +29,21 @@ public class DiaryController {
     @Autowired
     ModelMapper modelMapper;
 
+    //日記アップロード画面へ遷移
+    @GetMapping("/diaryUpload")
+    public String getDiary(@ModelAttribute DiaryForm form1){
+        return "/user/diaryUpload";
+    }
+
+    //日記一覧画面へ遷移
+    @GetMapping("diaryList")
+    public String getDiaryList(@ModelAttribute DiaryForm diaryForm, Model model){
+        List<DiaryModel> diaries = diaryService.selectDiariesAll();
+        model.addAttribute("diaries",diaries);
+        return "/user/diaryList";
+    }
+
+
     //日記アップロード
     @PostMapping("/diaryUpload")
     public String postDiary(@ModelAttribute DiaryForm diaryForm, Model model){
@@ -123,10 +138,6 @@ public class DiaryController {
         return "redirect:/user/diaryDetails";
     }
 
-    @GetMapping("/diaryUpload")
-    public String getDiaryList(){
 
-        return "/user/diaryUpload";
-    }
 
     }
