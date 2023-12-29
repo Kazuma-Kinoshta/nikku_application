@@ -8,13 +8,15 @@
 
     <!--CSS読み込み-->
     <link rel="stylesheet" th:href="@{/css/diaryDetails.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
 </head>
 
 <body>
     <div style="width:100%">
-        <div class="img_box" style="width:300px; margin-left:40px; margin-top:30px;">
-            <img th:src="@{/img/logo.png}" style="width:200px;" />
+        <div class="logo_box">
+            <img class="logo_img" th:src="@{/img/logo.png}" />
         </div>
+        <ul class="header_menu"></ul>
         <div class="img_box" style="width:300px; margin-left:40px; margin-top:30px;">
             <h1>日記詳細</h1>
         </div>

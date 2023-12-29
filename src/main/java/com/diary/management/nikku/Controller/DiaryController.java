@@ -1,6 +1,7 @@
 package com.diary.management.nikku.Controller;
 import com.diary.management.nikku.Form.DiaryForm;
 import com.diary.management.nikku.Model.DiaryModel;
+import com.diary.management.nikku.Repository.DiaryRepository;
 import com.diary.management.nikku.Service.DiaryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -21,6 +23,8 @@ public class DiaryController {
     @Autowired
     DiaryService diaryService;
 
+    @Autowired
+    DiaryRepository diaryRepository;
 
     @Autowired
     ModelMapper modelMapper;
@@ -58,14 +62,30 @@ public class DiaryController {
                                   @RequestParam("lastName") String lastName,
                                   @RequestParam("firstName") String firstName,
                                   @RequestParam("diaryDate") String diaryDate,
-                                  @RequestParam("checked") String checked){
+                                  @RequestParam("checked") String checked) throws ParseException {
 
         DiaryForm diaryForm = new DiaryForm();
         diaryForm.setGrade(grade);
+        diaryForm.setUserClass(userClass);
+        diaryForm.setStudentNumber(studentNumber);
+        diaryForm.setLastName(lastName);
+        diaryForm.setFirstName(firstName);
+
+        //日付が入力されていた場合はSQL検索用に整形してからフォームに格納
+        diaryForm.setDiaryDate(diaryDate.replace("/", "-"));
+
+        //確認済みか否かの値が入力されていた場合は、Boolean型に変換して格納
+        Boolean checkedBoolean = null;
+        if(!(checked == null || checked.isEmpty())){
+            checkedBoolean = Boolean.valueOf(checked);
+        }
+        diaryForm.setChecked(checkedBoolean);
+
+        List<DiaryModel> diaries = diaryRepository.selectDiaryForList(diaryForm);
 
         //日記一覧へ
 
-//        model.addAttribute("diaries",diaries);
+        model.addAttribute("diaries",diaries);
 
         return "/user/diaryList";
     }

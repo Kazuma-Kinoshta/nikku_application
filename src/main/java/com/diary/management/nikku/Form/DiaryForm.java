@@ -8,9 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class DiaryForm {
-    @Setter
     String userId;
-    @Setter
     String diaryDate;
     String diaryText;
     Boolean checked;
@@ -24,11 +22,10 @@ public class DiaryForm {
     String lastName;
     String firstName;
     String userClass;
-    @Getter
     String grade;
     String studentNumber;
 
-    public void setChecked(boolean b) {
+    public void setChecked(Boolean b) {
         this.checked = b;
     }
 

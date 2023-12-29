@@ -1,9 +1,13 @@
 package com.diary.management.nikku.Model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 @Data
+@Setter
+@Getter
 public class DiaryModel {
 private String userId;
 private Date diaryDate;
@@ -23,19 +27,4 @@ private String grade;
 private String studentNumber;
 private String schoolName;
 
-    public String getSleepTime() {
-        return this.sleepTime;
-    }
-
-    public String getWakeTime() {
-        return this.wakeTime;
-    }
-
-    public void setSleepTime(String sleepTime) {
-        this.sleepTime = sleepTime;
-    }
-
-    public void setWakeTime(String wakeTime) {
-        this.wakeTime = wakeTime;
-    }
 }
