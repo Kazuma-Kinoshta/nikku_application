@@ -8,7 +8,6 @@
 
     <!--CSS読み込み-->
     <link rel="stylesheet" th:href="@{/css/common.css}">
-    <link rel="stylesheet" th:href="@{/css/studentList.css}">
 
 </head>
 
@@ -34,75 +33,6 @@
         <div class="img_box" style="width:300px; margin-left:40px; margin-top:30px;">
             <h1>生徒一覧</h1>
         </div>
-        <div class="wrapper" style="background-color:#008080; padding:10px; margin-bottom:25px;">
-            <form method="get" action="/user/studentList/search">
-                <div class="search_container">
-                    <div style="margin-right:20px;">
-                        <span style="margin-right:5px;">学年</span>
-                        <input type="text" name="grade" />
-                    </div>
-                    <div style="margin-right:20px;">
-                        <span style="margin-right:5px;">クラス</span>
-                        <input type="text" name="userClass" />
-                    </div>
-                    <div style="margin-right:20px;">
-                        <span style="margin-right:5px;">出席番号</span>
-                        <input type="text" name="studentNumber" />
-                    </div>
-                </div>
-                <div class="search_container">
-                    <div style="margin-right:20px;">
-                        <span style="margin-right:5px;">苗字</span>
-                        <input type="text" name="lastName" />
-                    </div>
-                    <div style="margin-right:20px;">
-                        <span style="margin-right:5px;">名前</span>
-                        <input type="text" name="firstName" />
-                    </div>
-
-                </div>
-                <div style="text-align:center; margin-top:20px;"><input type="submit" value="検索"></div>
-            </form>
-
-        </div>
-
-        <!-- 体調   -->
-        <div class="wrapper">
-            <table border="1" style="border-collapse: collapse">
-                <tr>
-                    <th>学年</th>
-                    <th>クラス</th>
-                    <th>出席番号</th>
-                    <th>氏名</th>
-                    <th>　　</th>
-                    <th>　　</th>
-                </tr>
-                <span th:each="user:${userList}">
-                    <tr>
-                        <td th:text="${user.grade}"></td>
-                        <td th:text="${user.userClass}"></td>
-                        <td th:text="${user.studentNumber}"></td>
-                        <td><span th:text="${user.lastName}"></span> <span th:text="${user.firstName}"></span></td>
-                        <td>
-                            <form action="/user/diaryDetails" method="get">
-                                <input type="submit" value="日記" />
-                                <input type="hidden" name="userId" th:value="${user.userId}">
-                            </form>
-                        </td>
-                        <td>
-                            <form action="/user/diaryDetails" method="get">
-                                <input type="submit" value="相談" />
-                                <input type="hidden" name="userId" th:value="${user.userId}">
-                            </form>
-                        </td>
-                    </tr>
-                        </span>
-            </table>
-            <th:block th:if="${userList.size() == 0}">
-                該当する生徒はいません
-            </th:block>
-        </div>
-
     </div>
 </body>
 

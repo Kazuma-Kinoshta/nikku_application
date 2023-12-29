@@ -1,12 +1,8 @@
 package com.diary.management.nikku.Form;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
-@Setter
-@Getter
 public class UserForm {
     String userId;
     String password;
@@ -19,15 +15,15 @@ public class UserForm {
     String grade;
     String studentNumber;
 
-//    public void setFirstName(String firstName) {
-//        this.firstName = firstName;
-//    }
-//
-//    public void setUserId(String userId) {
-//        this.userId = userId;
-//    }
-//
-//    public void setLastName(String lastName) {
-//        this.lastName = lastName;
-//    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }

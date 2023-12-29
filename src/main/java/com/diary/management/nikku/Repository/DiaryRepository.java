@@ -126,7 +126,6 @@ public class DiaryRepository {
             //検索結果を格納するモデル
             DiaryModel diaryModel = new DiaryModel();
 
-            diaryModel.setUserId(map.get("user_id").toString());
             diaryModel.setGrade(map.get("grade").toString());
             diaryModel.setUserClass(map.get("user_class").toString());
             diaryModel.setStudentNumber(map.get("student_number").toString());
