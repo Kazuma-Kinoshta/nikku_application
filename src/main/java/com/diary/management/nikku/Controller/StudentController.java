@@ -56,7 +56,9 @@ public class StudentController {
         userForm.setLastName(lastName);
         userForm.setFirstName(firstName);
 
+
         List<UserForm> userList = studentRepository.selectStudentForList(userForm);
+
         model.addAttribute("userList",userList);
         return "user/studentList";
     }

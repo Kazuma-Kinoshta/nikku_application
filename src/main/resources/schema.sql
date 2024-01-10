@@ -40,3 +40,25 @@ CREATE TABLE IF NOT EXISTS questionnare(
     not_sleep BOOLEAN,
     PRIMARY KEY(user_id,diary_date)
 );
+
+CREATE TABLE IF NOT EXISTS consultation(
+    consultation_id CHAR(16) PRIMARY KEY,
+    user_id CHAR(10) NOT NULL,
+    consultation_date DATETIME NOT NULL,
+    consultation_text VARCHAR,
+    school_id CHAR(5) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS response(
+    consultation_id CHAR(16) NOT NULL,
+    response_number CHAR(10) NOT NULL,
+    response_user_id CHAR(10) NOT NULL,
+    response_text VARCHAR,
+    PRIMARY KEY(consultation_id,response_number)
+);
+
+CREATE TABLE IF NOT EXISTS consultation_check(
+    consultation_id CHAR(16) NOT NULL,
+    check_user_id CHAR(10) NOT NULL,
+    PRIMARY KEY(consultation_id,check_user_id)
+)

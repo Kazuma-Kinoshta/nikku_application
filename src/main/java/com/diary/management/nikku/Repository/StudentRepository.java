@@ -44,7 +44,10 @@ public class StudentRepository {
 
         //検索結果を格納するモデルのリスト
         List<UserForm> userList = new ArrayList<>();
+
+        //SQL実行
         List<Map<String,Object>> userMap = jdbcTemplate.queryForList(sql);
+
         for(Map<String, Object> map: userMap){
             //検索結果を格納するモデル
             UserForm user = new UserForm();

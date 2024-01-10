@@ -33,6 +33,18 @@
         <div class="img_box" style="width:300px; margin-left:40px; margin-top:30px;">
             <h1>相談投稿</h1>
         </div>
+        <th:block th:if="${success}">
+            <p class="success">アップロードが完了しました</p>
+        </th:block>
+        <p>担任の先生に相談できないことを、教頭先生や校長先生に相談できます。</p>
+        <p style="margin-top:30px">相談ごと</p>
+        <form method="post" action="/user/consultationUpload" th:object="${consultationForm}">
+        <textarea style="width:70%; height:150px;" th:field="*{consultationText}"></textarea>
+        <div style="text-align:center; width:70%;">
+            <input type="submit" value="提出" />
+        </div>
+            <input type="hidden" value="0000000001" name="userId" />
+        </form>
     </div>
 </body>
 

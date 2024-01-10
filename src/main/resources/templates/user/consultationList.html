@@ -7,16 +7,16 @@
     <title>examination</title>
 
     <!--CSS読み込み-->
+    <link rel="stylesheet" th:href="@{/css/consultationList.css}">
     <link rel="stylesheet" th:href="@{/css/common.css}">
-
 </head>
 
 <body>
-    <div style="width:100%">
-        <div class="logo_box">
-            <img class="logo_img" th:src="@{/img/logo.png}"/>
-        </div>
-        <div class="header">
+<div style="width:100%">
+    <div class="logo_box">
+        <img class="logo_img" th:src="@{/img/logo.png}" />
+    </div>
+    <div class="header">
         <div class="header_content">
             <ul class="header_menu">
                 <li><a href="/user/diaryUpload">投稿する</a></li>
@@ -29,13 +29,95 @@
                 <li><a href="/user/login">ログアウト</a></li>
             </ul>
         </div>
-        </div>
-
-        <div class="img_box" style="width:300px; margin-left:40px; margin-top:30px;">
-            <h1>相談一覧</h1>
-        </div>
+    </div>
+    <div class="img_box" style="width:300px; margin-left:40px; margin-top:30px;">
+        <h1>相談一覧</h1>
+    </div>
+    <div class="wrapper" style="background-color:#008080; padding:10px; margin-bottom:25px;">
+        <form method="get" action="/user/diaryList/search">
+            <div class="search_container">
+                <div style="margin-right:20px;">
+                    <span style="margin-right:5px;">学年</span>
+                    <input type="text" name="grade" />
+                </div>
+                <div style="margin-right:20px;">
+                    <span style="margin-right:5px;">クラス</span>
+                    <input type="text" name="userClass" />
+                </div>
+                <div style="margin-right:20px;">
+                    <span style="margin-right:5px;">出席番号</span>
+                    <input type="text" name="studentNumber" />
+                </div>
+            </div>
+            <div class="search_container">
+                <div style="margin-right:20px;">
+                    <span style="margin-right:5px;">苗字</span>
+                    <input type="text" name="lastName" />
+                </div>
+                <div style="margin-right:20px;">
+                    <span style="margin-right:5px;">名前</span>
+                    <input type="text" name="firstName" />
+                </div>
+                <div style="margin-right:20px;">
+                    <span style="">日付</span>
+                    <span style="font-size:11px; margin-right:5px;">(例 2023/12/11)</span>
+                    <input type="text" name="diaryDate" />
+                </div>
+                <div style="width:23%;">
+                    <span style="margin-right:5px;">確認</span>
+                    <select name="checked">
+                        <option value="">指定なし</option>
+                        <option value="true">確認済</option>
+                        <option value="false">未確認</option>
+                    </select>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:20px;"><input type="submit" value="検索"></div>
+        </form>
 
     </div>
+
+    <!-- 体調   -->
+    <div class="wrapper">
+        <table border="1" style="border-collapse: collapse">
+            <tr>
+                <th>学年</th>
+                <th>クラス</th>
+                <th>出席番号</th>
+                <th>日付</th>
+                <th>氏名</th>
+                <th>確認</th>
+                <th>　　</th>
+            </tr>
+            <span th:each="consultation:${consultations}">
+                    <tr>
+                        <td th:text="${consultation.grade}" rowspan="2"></td>
+                        <td th:text="${consultation.userClass}"></td>
+                        <td th:text="${consultation.studentNumber}"></td>
+<!--                        <td th:text="${#dates.format(consultation.consultationDate, 'YYYY/MM/dd')}">　</td>-->
+                        <td></td>
+                        <td><span th:text="${consultation.lastName}"></span> <span th:text="${consultation.firstName}"></span></td>
+                        <td th:text="${consultation.checked} ? '済' : '未'"></td>
+                        <td>
+                            <form action="/user/consultationDetails" method="get">
+                                <input type="submit" value="詳細" />
+                                <input type="hidden" name="userId" th:value="${consultation.userId}">
+                                <input type="hidden" name="consultationId" th:value="${consultation.consultationId}">
+                            </form>
+                        </td>
+                    </tr>
+                    <tr style="height:40px;">
+                        <th>本文</th>
+                        <td colspan="6" style="width:750px;" th:text="${consultation.consultationText}"></td>
+                    </tr>
+                        </span>
+        </table>
+        <th:block th:if="${consultations.size() == 0}">
+            該当する日記はありません
+        </th:block>
+    </div>
+
+</div>
 </body>
 
 </html>

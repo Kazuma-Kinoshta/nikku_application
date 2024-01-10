@@ -31,7 +31,8 @@ public class DiaryController {
 
     //日記アップロード画面へ遷移
     @GetMapping("/diaryUpload")
-    public String getDiary(@ModelAttribute DiaryForm form1){
+    public String getDiary(@ModelAttribute DiaryForm diaryForm,
+                           Model model){
         return "/user/diaryUpload";
     }
 
@@ -46,7 +47,8 @@ public class DiaryController {
 
     //日記アップロード
     @PostMapping("/diaryUpload")
-    public String postDiary(@ModelAttribute DiaryForm diaryForm, Model model){
+    public String postDiary(@ModelAttribute DiaryForm diaryForm, Model model,
+                            @RequestParam("userId") String userId){
 
         //今日の日付登録
         var today = LocalDate.now().toString();
