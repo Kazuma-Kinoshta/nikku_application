@@ -47,7 +47,8 @@ public class DiaryController {
 
     //日記アップロード
     @PostMapping("/diaryUpload")
-    public String postDiary(@ModelAttribute DiaryForm diaryForm, Model model,
+    public String postDiary(@ModelAttribute DiaryForm diaryForm,
+                            Model model,
                             @RequestParam("userId") String userId){
 
         //今日の日付登録

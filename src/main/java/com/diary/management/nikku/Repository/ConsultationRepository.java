@@ -28,7 +28,7 @@ public class ConsultationRepository {
         boolean checkDistinct = false;
         Random rand = new Random();
         String consultationId = "";
-        //D重複チェック処理
+        // ID重複チェック処理
         do{
            for(int i = 0; i < 16; i++){
             consultationId += Integer.valueOf(rand.nextInt(10)).toString();
