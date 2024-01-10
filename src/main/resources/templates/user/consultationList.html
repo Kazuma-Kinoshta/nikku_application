@@ -94,8 +94,8 @@
                         <td th:text="${consultation.grade}" rowspan="2"></td>
                         <td th:text="${consultation.userClass}"></td>
                         <td th:text="${consultation.studentNumber}"></td>
-<!--                        <td th:text="${#dates.format(consultation.consultationDate, 'YYYY/MM/dd')}">　</td>-->
-                        <td></td>
+                        <td th:text="${#temporals.format(consultation.consultationDate, 'YYYY/MM/dd HH:mm')}">　</td>
+
                         <td><span th:text="${consultation.lastName}"></span> <span th:text="${consultation.firstName}"></span></td>
                         <td th:text="${consultation.checked} ? '済' : '未'"></td>
                         <td>
