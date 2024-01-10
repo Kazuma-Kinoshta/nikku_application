@@ -34,29 +34,29 @@
         <h1>相談一覧</h1>
     </div>
     <div class="wrapper" style="background-color:#008080; padding:10px; margin-bottom:25px;">
-        <form method="get" action="/user/diaryList/search">
+        <form method="get" action="/user/consultationList/search" th:object="${consultationForm}">
             <div class="search_container">
                 <div style="margin-right:20px;">
                     <span style="margin-right:5px;">学年</span>
-                    <input type="text" name="grade" />
+                    <input type="text" name="grade" th:field="*{grade}"/>
                 </div>
                 <div style="margin-right:20px;">
                     <span style="margin-right:5px;">クラス</span>
-                    <input type="text" name="userClass" />
+                    <input type="text" name="userClass" th:field="*{userClass}"/>
                 </div>
                 <div style="margin-right:20px;">
                     <span style="margin-right:5px;">出席番号</span>
-                    <input type="text" name="studentNumber" />
+                    <input type="text" name="studentNumber" th:field="*{studentNumber}"/>
                 </div>
             </div>
             <div class="search_container">
                 <div style="margin-right:20px;">
                     <span style="margin-right:5px;">苗字</span>
-                    <input type="text" name="lastName" />
+                    <input type="text" name="lastName" th:field="*{lastName}"/>
                 </div>
                 <div style="margin-right:20px;">
                     <span style="margin-right:5px;">名前</span>
-                    <input type="text" name="firstName" />
+                    <input type="text" name="firstName" th:field="*{firstName}" />
                 </div>
                 <div style="margin-right:20px;">
                     <span style="">日付</span>
@@ -68,7 +68,7 @@
                     <select name="checked">
                         <option value="">指定なし</option>
                         <option value="true">確認済</option>
-                        <option value="false">未確認</option>
+                        <option value="null">未確認</option>
                     </select>
                 </div>
             </div>

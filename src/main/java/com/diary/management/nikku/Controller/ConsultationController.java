@@ -58,8 +58,19 @@ public class ConsultationController {
 
     //相談一覧画面へ遷移
     @GetMapping("/consultationList")
-    public String getConsultationList(Model model){
+    public String getConsultationList(Model model,
+                                      @ModelAttribute ConsultationForm consultationForm){
 
+        List<ConsultationForm> consultations = consultationRepository.selectConsultationAll();
+
+        model.addAttribute("consultations",consultations);
+        return "user/consultationList";
+    }
+
+    //相談一覧画面で検索実行
+    @GetMapping("/consultationList/search")
+    public String searchConsultationList(Model model,
+                                         @ModelAttribute ConsultationForm consultationForm){
         List<ConsultationForm> consultations = consultationRepository.selectConsultationAll();
 
         model.addAttribute("consultations",consultations);
