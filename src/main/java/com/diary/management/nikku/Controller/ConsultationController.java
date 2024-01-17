@@ -12,12 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,16 +70,8 @@ public class ConsultationController {
     //相談一覧画面で検索実行
     @GetMapping("/consultationList/search")
     public String searchConsultationList(Model model,
-                                         @ModelAttribute ConsultationForm consultationForm,
-                                         @RequestParam("consultationDate") String consultationDate){
-        if(!(consultationDate == null || consultationDate.isEmpty())) {
-            consultationDate.replace("/", "-");
-            consultationDate += " 00:00";
-            DateTimeFormatter dtfm = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-            consultationForm.setConsultationDate(LocalDateTime.parse(consultationDate, dtfm));
-        }
-
-        List<ConsultationForm> consultations = consultationRepository.searchConsultations(consultationForm);
+                                         @ModelAttribute ConsultationForm consultationForm){
+        List<ConsultationForm> consultations = consultationRepository.selectConsultationAll();
 
         model.addAttribute("consultations",consultations);
         return "user/consultationList";
