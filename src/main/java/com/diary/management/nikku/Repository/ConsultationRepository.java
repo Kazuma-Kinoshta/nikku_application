@@ -30,19 +30,19 @@ public class ConsultationRepository {
         String consultationId = "";
         // ID重複チェック処理
         do{
-           for(int i = 0; i < 16; i++){
-            consultationId += Integer.valueOf(rand.nextInt(10)).toString();
-           }
-           selectSql += consultationId + ";";
+            for(int i = 0; i < 16; i++){
+                consultationId += Integer.valueOf(rand.nextInt(10)).toString();
+            }
+            selectSql += consultationId + ";";
 
-           try{
-               int resultNum = jdbcTemplate.queryForObject(selectSql, Integer.class);
-               if(resultNum == 0){
-                   checkDistinct = true;
-               }
+            try{
+                int resultNum = jdbcTemplate.queryForObject(selectSql, Integer.class);
+                if(resultNum == 0){
+                    checkDistinct = true;
+                }
 
-           }catch (IncorrectResultSizeDataAccessException e){
-           }
+            }catch (IncorrectResultSizeDataAccessException e){
+            }
 
         }while(!checkDistinct);
 
@@ -77,4 +77,142 @@ public class ConsultationRepository {
         }
         return consultations;
     }
+
+    //検索実行
+    public List<ConsultationForm> searchConsultations(ConsultationForm consultationForm){
+        String searchSql = "select * from consultation inner join users on users.user_id = consultation.user_id left join consultation_check on consultation.consultation_id = consultation_check.consultation_id";
+        int contentsCounter = 0;
+        int queryCounter = 0;
+
+        if(!(consultationForm.getGrade() == null || consultationForm.getGrade().isEmpty())){
+            contentsCounter++;
+        }
+
+        if(!(consultationForm.getUserClass() == null || consultationForm.getUserClass().isEmpty())){
+            contentsCounter++;
+        }
+
+        if(!(consultationForm.getStudentNumber() == null || consultationForm.getStudentNumber().isEmpty())){
+            contentsCounter++;
+        }
+
+        if(!(consultationForm.getLastName() == null || consultationForm.getLastName().isEmpty())){
+            contentsCounter++;
+        }
+
+        if(!(consultationForm.getFirstName() == null || consultationForm.getFirstName().isEmpty())){
+            contentsCounter++;
+        }
+
+        if(!(consultationForm.getConsultationDate() == null)){
+            contentsCounter++;
+        }
+
+        if(!(consultationForm.getChecked() == null)){
+            contentsCounter++;
+        }
+
+        //検索項目の入力を1個以上確認できればwhereを挿入
+        if(contentsCounter > 0) {
+            searchSql = searchSql + " where";
+        }
+
+        if(!(consultationForm.getGrade() == null || consultationForm.getGrade().isEmpty())){
+            //この検索項目が2つ目以上なら冒頭にandをつける
+            if(queryCounter > 0){
+                searchSql = searchSql + " and";
+            }
+            searchSql = searchSql + " users.grade = '" + consultationForm.getGrade() + "'";
+            queryCounter++;
+        }
+
+        if(!(consultationForm.getUserClass() == null || consultationForm.getUserClass().isEmpty())){
+            //この検索項目が2つ目以上なら冒頭にandをつける
+            if(queryCounter > 0){
+                searchSql = searchSql + " and";
+            }
+            searchSql = searchSql + " users.user_class = '" + consultationForm.getUserClass() + "'";
+            queryCounter++;
+        }
+
+        if(!(consultationForm.getStudentNumber() == null || consultationForm.getStudentNumber().isEmpty())){
+            //この検索項目が2つ目以上なら冒頭にandをつける
+            if(queryCounter > 0){
+                searchSql = searchSql + " and";
+            }
+            searchSql = searchSql + " users.student_number = '" + consultationForm.getStudentNumber() + "'";
+            queryCounter++;
+        }
+
+        if(!(consultationForm.getLastName() == null || consultationForm.getLastName().isEmpty())){
+            //この検索項目が2つ目以上なら冒頭にandをつける
+            if(queryCounter > 0){
+                searchSql = searchSql + " and";
+            }
+            searchSql = searchSql + " users.last_name = '" + consultationForm.getLastName() + "'";
+            queryCounter++;
+        }
+
+        if(!(consultationForm.getFirstName() == null || consultationForm.getFirstName().isEmpty())){
+            //この検索項目が2つ目以上なら冒頭にandをつける
+            if(queryCounter > 0){
+                searchSql = searchSql + " and";
+            }
+            searchSql = searchSql + " users.first_name = '" + consultationForm.getFirstName() + "'";
+            queryCounter++;
+        }
+
+        if(!(consultationForm.getConsultationDate() == null)){
+            //この検索項目が2つ目以上なら冒頭にandをつける
+            if(queryCounter > 0){
+                searchSql = searchSql + " and";
+            }
+            String consultationDateString = consultationForm.getConsultationDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+            searchSql = searchSql + " consultation.consultation_date LIKE '" + consultationDateString + "%" + "'";
+            queryCounter++;
+        }
+
+        if(!(consultationForm.getChecked() == null)){
+            //この検索項目が2つ目以上なら冒頭にandをつける
+            if(queryCounter > 0){
+                searchSql = searchSql + " and";
+            }
+
+            if(consultationForm.getChecked()){
+                searchSql = searchSql + " consultation_check.consultation_id is NOT null";
+
+            }else if (!(consultationForm.getChecked())){
+                searchSql = searchSql + " consultation_check.consultation_id is null";
+            }
+
+            queryCounter++;
+        }
+
+        //SQL文の末尾に;をつける
+        searchSql = searchSql + ";" ;
+
+        List<Map<String, Object>> results = jdbcTemplate.queryForList(searchSql);
+        List<ConsultationForm> consultations = new ArrayList<>();
+        for(Map<String, Object> result:results){
+            ConsultationForm consultation = new ConsultationForm();
+            consultation.setConsultationId(result.get("consultation_id").toString());
+            consultation.setUserId(result.get("user_id").toString());
+            DateTimeFormatter dtFt = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+            consultation.setConsultationDate(LocalDateTime.parse(result.get("consultation_date").toString().replace("-","/").substring(0,16),dtFt));
+            consultation.setConsultationText(result.get("consultation_text").toString());
+            if(!(result.get("check_user_id") == null)){
+                consultation.setChecked(true);
+            }
+            consultation.setGrade(result.get("grade").toString());
+            consultation.setUserClass(result.get("user_class").toString());
+            consultation.setStudentNumber(result.get("student_number").toString());
+            consultation.setLastName(result.get("last_name").toString());
+            consultation.setFirstName(result.get("first_name").toString());
+
+            consultations.add(consultation);
+        }
+        return consultations;
+    }
+
 }

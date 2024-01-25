@@ -61,14 +61,14 @@
                 <div style="margin-right:20px;">
                     <span style="">日付</span>
                     <span style="font-size:11px; margin-right:5px;">(例 2023/12/11)</span>
-                    <input type="text" name="diaryDate" />
+                    <input type="text" name="consultationDateString" th:value="${consultationDateString}"/>
                 </div>
                 <div style="width:23%;">
                     <span style="margin-right:5px;">確認</span>
                     <select name="checked">
-                        <option value="">指定なし</option>
-                        <option value="true">確認済</option>
-                        <option value="null">未確認</option>
+                        <option value="" th:selected="${consultationForm.checked == null}">指定なし</option>
+                        <option value="true" th:selected="${consultationForm.checked == true}">確認済</option>
+                        <option value="false" th:selected="${consultationForm.checked == false}">未確認</option>
                     </select>
                 </div>
             </div>
